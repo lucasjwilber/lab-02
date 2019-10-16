@@ -24,18 +24,17 @@ $.get('data/page-1.json', painting => {
         <p></p>
       </section> */}
 
-const $template = $('#photo-template');
-
 AnimalPainting.prototype.render = function () {
-
   const $thisPaintingTemplate = $('#photo-template').html();
-
   const $newSection = $('<section></section>');
-
   $($newSection).html($thisPaintingTemplate);
-
   $($newSection).find('h2').text(this.title);
   $($newSection).find('img').attr('src', this.image_url);
   $($newSection).find('p').text(this.description);
   $('main').append($newSection);
-}
+};
+
+
+$().ready(
+
+);
