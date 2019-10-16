@@ -55,7 +55,7 @@ $('select').change(function (event) {
   allPaintings = [];
   console.log(typeof (selectedKey));
 
-  $('section').remove();
+  $('section').fadeOut(750);
 
   $.get('data/page-1.json', painting => {
     painting.forEach(painting => {
