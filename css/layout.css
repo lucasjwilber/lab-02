@@ -1,0 +1,17 @@
+main {
+  overflow: auto;
+}
+section {
+  background-color: lightgray;
+  float: left;
+  width: 220px;
+  height: 250px;
+  margin: 15px;
+}
+#photo-template {
+  display: hidden;
+  background-color: black;
+  width: 0px;
+  height: 0px;
+  margin: 0px;
+}

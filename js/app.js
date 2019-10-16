@@ -1,6 +1,8 @@
 'use strict';
 
 let allPaintings = [];
+let allOptions = [];
+let uniqueOptions = [];
 
 function AnimalPainting(image_url, title, description, keyword, horns) {
   this.image_url = image_url;
@@ -9,20 +11,26 @@ function AnimalPainting(image_url, title, description, keyword, horns) {
   this.keyword = keyword;
   this.horns = horns;
   allPaintings.push(this);
+  allOptions.push(this.keyword);
 }
 
 
 $.get('data/page-1.json', painting => {
+
   painting.forEach(painting => {
     new AnimalPainting(painting.image_url, painting.title, painting.description, painting.keyword, painting.horns).render();
   });
+
+  uniqueOptions = new Set(allOptions);
+
+  uniqueOptions.forEach(option => {
+    let $optionTag = $('<option></option>');
+    $($optionTag).text(option);
+    $('select').append($optionTag);
+  });
+
 });
 
-{/* <section id="photo-template">
-        <h2></h2>
-        <img src="" alt="">
-        <p></p>
-      </section> */}
 
 const $thisPaintingTemplate = $('#photo-template').html();
 AnimalPainting.prototype.render = function () {
@@ -57,5 +65,10 @@ $('select').change(function (event) {
         new AnimalPainting(painting.image_url, painting.title, painting.description, painting.keyword, painting.horns).render();
       }
     });
-  })
+
+    let uniqueOptions = new Set(allOptions);
+
+  });
 });
+
+$($thisPaintingTemplate).remove();
