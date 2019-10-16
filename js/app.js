@@ -9,7 +9,7 @@ function AnimalPainting(image_url, title, description, keyword, horns) {
   this.keyword = keyword;
   this.horns = horns;
   allPaintings.push(this);
-};
+}
 
 
 $.get('data/page-1.json', painting => {
@@ -24,8 +24,8 @@ $.get('data/page-1.json', painting => {
         <p></p>
       </section> */}
 
+const $thisPaintingTemplate = $('#photo-template').html();
 AnimalPainting.prototype.render = function () {
-  const $thisPaintingTemplate = $('#photo-template').html();
   const $newSection = $('<section></section>');
   $($newSection).html($thisPaintingTemplate);
   $($newSection).find('h2').text(this.title);
@@ -36,5 +36,26 @@ AnimalPainting.prototype.render = function () {
 
 
 $().ready(
-
 );
+
+
+$('select').change(function (event) {
+
+  event.preventDefault();
+  console.log($('select').val());
+  let selectedKey = $('select').val();
+  allPaintings = [];
+  console.log(typeof (selectedKey));
+
+  $('section').remove();
+
+  $.get('data/page-1.json', painting => {
+    painting.forEach(painting => {
+      if (painting.keyword === selectedKey) {
+        console.log(typeof (painting.keyword));
+        console.log(typeof (selectedKey));
+        new AnimalPainting(painting.image_url, painting.title, painting.description, painting.keyword, painting.horns).render();
+      }
+    });
+  })
+});
