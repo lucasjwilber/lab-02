@@ -77,6 +77,8 @@ Estimate of time needed to complete: 40min
 
 Start time: 10:34
 
-Finish time: 
+Lunch: 33min
 
-Actual time needed to complete: 
+Finish time: 12:55
+
+Actual time needed to complete: 1 hour 50min

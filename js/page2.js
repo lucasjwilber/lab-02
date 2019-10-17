@@ -3,6 +3,7 @@
 let allPaintings = [];
 let allOptions = [];
 let uniqueOptions = [];
+// let sortarr = [];
 
 function AnimalPainting(image_url, title, description, keyword, horns) {
   this.image_url = image_url;
@@ -18,15 +19,24 @@ function AnimalPainting(image_url, title, description, keyword, horns) {
 $.get('data/page-2.json', painting => {
 
   painting.forEach(painting => {
-    $('#paintingsArea').append(new AnimalPainting(painting.image_url, painting.title, painting.description, painting.keyword, painting.horns).render());
+    new AnimalPainting(painting.image_url, painting.title, painting.description, painting.keyword, painting.horns);
   });
+  // console.log(allPaintings);
 
+
+  sortfunction();
+  // console.log(allPaintings);
+
+  allPaintings.forEach(painting => {
+    $('#paintingsArea').append(painting.render());
+
+  });
   uniqueOptions = new Set(allOptions);
 
   uniqueOptions.forEach(option => {
     let $optionTag = $('<option></option>');
     $($optionTag).text(option);
-    $('select').append($optionTag);
+    $('#filter').append($optionTag);
   });
 
 });
@@ -36,10 +46,9 @@ const $thisPaintingTemplate = $('#photo-template').html();
 
 
 AnimalPainting.prototype.render = function () {
-
-  var source   = $("#photo-template").html();
+  var source = $("#photo-template").html();
   var template = Handlebars.compile(source);
-
+  // $('main').append(template);
   return template(this);
 };
 
@@ -48,11 +57,11 @@ $().ready(
 );
 
 
-$('select').change(function (event) {
+$('#filter').change(function (event) {
 
   event.preventDefault();
-  console.log($('select').val());
-  let selectedKey = $('select').val();
+  console.log($('#filter').val());
+  let selectedKey = $('#filter').val();
   allPaintings = [];
   console.log(typeof (selectedKey));
 
@@ -72,5 +81,54 @@ $('select').change(function (event) {
   });
 });
 
-$($thisPaintingTemplate).remove();
 
+// this is for the sort images
+
+function sortfunction() {
+  allPaintings.sort((a, b) => {
+    if ($('#sort').val() === 'horns') {
+      if (a.horns > b.horns) {
+        return 1;
+      } else if (a.horns < b.horns) {
+        return -1;
+      } else {
+        return 0;
+      }
+    } else if ($('#sort').val() === 'alphabetical') {
+      if (a.title > b.title) {
+        return 1;
+      } else if (a.title < b.title) {
+        return -1;
+      } else {
+        return 0;
+      }
+
+    } else {
+      if (a.title > b.title) {
+        return 1;
+      } else if (a.title < b.title) {
+        return -1;
+      } else {
+        return 0;
+      }
+    }
+  });
+}
+
+$('#sort').change(function (event) {
+
+  event.preventDefault();
+  console.log($('#sort').val());
+  let selectedKey = $('#sort').val();
+
+  $('section').fadeOut(750);
+
+  sortfunction();
+
+
+  allPaintings.forEach(painting => {
+    $('#paintingsArea').append(painting.render());
+  });
+});
+
+$($thisPaintingTemplate).remove();
