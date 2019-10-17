@@ -15,7 +15,7 @@ function AnimalPainting(image_url, title, description, keyword, horns) {
 }
 
 
-$.get('data/page-1.json', painting => {
+$.get('data/page-2.json', painting => {
 
   painting.forEach(painting => {
     $('#paintingsArea').append(new AnimalPainting(painting.image_url, painting.title, painting.description, painting.keyword, painting.horns).render());
@@ -58,7 +58,7 @@ $('select').change(function (event) {
 
   $('section').fadeOut(750);
 
-  $.get('data/page-1.json', painting => {
+  $.get('data/page-2.json', painting => {
     painting.forEach(painting => {
       if (painting.keyword === selectedKey) {
         console.log(typeof (painting.keyword));
@@ -73,3 +73,4 @@ $('select').change(function (event) {
 });
 
 $($thisPaintingTemplate).remove();
+
