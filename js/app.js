@@ -30,11 +30,6 @@ $.get('data/page-1.json', painting => {
   allPaintings.forEach(painting => {
     $('#paintingsArea').append(painting.render());
 
-    // var source = $("#photo-template").html();
-    // var template = Handlebars.compile(source);
-
-    // $('#paintingsArea').append(template);
-    // return template(this);
   });
   uniqueOptions = new Set(allOptions);
 
@@ -45,22 +40,6 @@ $.get('data/page-1.json', painting => {
   });
 
 });
-
-// $.get('data/page-1.json', painting => {
-
-//   painting.forEach(painting => {
-//     new AnimalPainting(painting.image_url, painting.title, painting.description, painting.keyword, painting.horns).render();
-//   });
-
-//   uniqueOptions = new Set(allOptions);
-
-//   uniqueOptions.forEach(option => {
-//     let $optionTag = $('<option></option>');
-//     $($optionTag).text(option);
-//     $('#filter').append($optionTag);
-//   });
-
-// });
 
 
 const $thisPaintingTemplate = $('#photo-template').html();
@@ -138,21 +117,17 @@ function sortfunction() {
 
 $('#sort').change(function (event) {
 
-
   event.preventDefault();
   console.log($('#sort').val());
   let selectedKey = $('#sort').val();
 
+  $('section').fadeOut(750);
 
+  sortfunction();
 
-  // $('section').fadeOut(750);
 
   allPaintings.forEach(painting => {
-    // allPaintings.push(painting);
-    var source = $("#photo-template").html();
-    var template = Handlebars.compile(source);
-
-    return template(this);
+    $('#paintingsArea').append(painting.render());
   });
 });
 
