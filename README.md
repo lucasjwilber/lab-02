@@ -73,9 +73,9 @@ Actual time needed to complete: 3 minutes
 
 Number and name of feature: Sort the images
 
-Estimate of time needed to complete: 
+Estimate of time needed to complete: 40min
 
-Start time: 
+Start time: 10:34
 
 Finish time: 
 
