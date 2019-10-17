@@ -1,9 +1,11 @@
 main {
   overflow: auto;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 section {
   background-color: lightgray;
-  float: left;
   width: 220px;
   height: 250px;
   margin: 15px;
